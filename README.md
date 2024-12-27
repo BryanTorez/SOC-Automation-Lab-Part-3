@@ -68,11 +68,15 @@ Here will be all of our passwords. The main one that we want of course, is the a
 
 Heading back to our wazuh dashboard. As we can see again, we have no agents installed. In order to install one, we can simply click on "Add Agent" because we are using a Windows machine. Select "Windows". Scroll down for the "Server address". We'll put in Wazuh's public IP. Which in my case was "159.203.17.39". Your public IP is going to be different than mine.
 
-Underneath, we see "Assign an agent name". This is optional, but I'll type in "mydfir". It'll then ask you if you want to select one or more existing groups. I'll leave that as default. Now we can copy the following command. So I'll go ahead and copy that. I am on my Windows machine so I'll open up a Powershell window with administrative privileges.
+Underneath, we see "Assign an agent name". This is optional, but I'll type in "mydfir". It'll then ask you if you want to select one or more existing groups. I'll leave that as default. Now we can copy the following command. So I'll go ahead and copy that. I am on my Windows machine, so I'll open up a Powershell window with administrative privileges.
 
-Once we open that up, go ahead and paste in the command and then hit "Enter". After the command is done installing, we can then start the service by typing in "Net Start wazuhsvc". That is one way to start the service, or you can go ahead and type in "Services" in the windows searchbar. Then from here you want to look for Wazuh Service. As we can see, it's running. 
+Once we open that up, go ahead and paste in the command and then hit "Enter". After the command is done installing, we can then start the service by typing in "Net Start wazuhsvc". That is one way to start the service, or you can go ahead and type in "Services" in the Windows search bar. Then from here, you want to look for Wazuh Service. As we can see, it's running. 
 
 So that means in our dashboard, we should be able to see our agent. I'll go ahead and close this one out. Currently, I do see the agent but it is disconnected, so let's just wait a little bit and see what happens. So after a couple of seconds, we can see that there is a total agent of one and an active agent as well
 
-That means our Windows machine is checking into Wasa successfully now we can click on security events and start querying four events you just configured both the hive and Wasa and now they are working as expected our end goal is to detect mimik cats usage on our Windows 10 client machine and in order to do that we must first generate Telemetry and create an alert related to mimik cats which is what we will do in the next episode that is it for the video and I hope this has been helpful for you so far if you stumbled across any kind of Errors along the way do let me know and I'll be happy to help you out.
+That means our Windows machine is checking into Wazuh successfully. Now we can click on "Security events" and start querying for events.
+
+You just configured both the Hive and Wazuh and now they are working as expected. Our end goal is to detect Mimikats usage on our Windows 10 client machine. To do that, we must first generate telemetry and create an alert related to Mimikats, which is what we will do in the next episode. 
+
+That is it for this part and I hope this has been helpful for you so far.
 
