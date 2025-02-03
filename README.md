@@ -209,16 +209,16 @@ We need to change that. We'll type in "chown -R thehive:thehive /opt/thp" and hi
 <br />
 <br />
 <br />
-So if we scroll down just a little bit here, we notice that the database and index configuration, this is what we need to configure. I'll change the hostname and remove the "127" address to our public IP of the Hive. Next, if you recall the cluster name for Cassandra I changed it to "mydfir". So I will remove "thp" and type in "mydfir". 
+So if we scroll down just a little bit here, we notice that the database and index configuration, this is what we need to configure. I'll change the hostname and remove the '127' address to our public IP of the Hive. Next, if you recall the cluster name for Cassandra I changed it to "mydfir". So I will remove "thp" and type in "mydfir". 
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/5QRBpL.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/Bl2S7Z.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/uXidWD.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
 <br />
@@ -226,83 +226,76 @@ So if we scroll down just a little bit here, we notice that the database and ind
 Scrolling down a bit again, the hostname is "127". I'm going to remove that and type in my Hive IP address. Now let's scroll down, we see that the storage is pointing to this directory. Now if you read the comments above right here, it says, "The path can be updated and should belong to the user/group running the Hive". That is why we have to change the ownership of those directories to the Hive, otherwise it wouldn't have access to write in that directory.
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/TPJX5z.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/lKECxq.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-<br />
-<br />
-If we scroll down we can see "application.basedUrl". It is currently pointing to "localhost". I will remove this and then type in my public IP address of the Hive. So far so good. I'll scroll down and that's the end of the configuration. By default, the Hive has both "Cortex" and "Misp" enabled. Cortex is their data enrichment and response capability, whereas Misp is used as their CTI platform, their, Cyber Thread Intelligence Platform.
-<br />
-<br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/7kT5qd.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
 <br />
 <br />
-I'll leave this as is for now and save out the configuration file. Now let's go and start the Hive, "systemctl start thehive" and now "systemctl enable thehive". Now that it's enabled, let's go and check the services for the Hive. And it is active and running. Perfect. One thing to keep note of is that, if you cannot access the Hive make sure to check all three services, Cassandra, Elastic Search, and the Hive. All of them should be running, otherwise The Hive won't start. In theory, we should be able to access the Hive with Port 9000.
+If we scroll down we can see "application.basedUrl". It is currently pointing to "localhost". I will remove this and then type in my public IP address of the Hive. I'll scroll down and that's the end of the configuration.
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/NtrQn6.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/DQoVmw.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-<br />
-<br />
-We are presented with the hive dashboard. We can log in with their default credentials which are "admin@thehive.local and the password is "secret". If you have been following along, you might experience an error on trying to log into the Hive. This could be trying to use default credentials and then it will tell you that your authentication failed. If that's the case take a look at the status of Elastic Search likely your Elastic Search is down.
-<br />
-<br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/LyeMu0.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
 <br />
 <br />
-If that's the case, you want to create a custom JVM option file and we can do that by typing in "nano /etc/elasticsearch/jvm.options.d/jvm.options". Once you open up this file, you want to paste in the following content. Essentially this is telling Java to limit its memory usage to 4 gigs. Our virtual machine has a total of 8 gigs, however for the sake of making sure nothing crashes, I'll change it to 2 gigs.
-<br />
-<br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+By default, the Hive has both "Cortex" and "Misp" enabled. Cortex is their data enrichment and response capability, whereas Misp is used as their CTI platform, their Cyber Thread Intelligence Platform. I'll leave this as is for now and save out the configuration file.
 <br />
 <br />
 <br />
 <br />
-Now this is telling Elastic Search to allocate 2 gigs of memory for Java. You can go ahead and save this out. Then, you want to restart your Elastic Search. Now again, this is only if you are experiencing any errors when you're trying to log in using default credentials. Now that we have the Hive configured, we'll move on to Wazuh and configure that.
+Now let's go and start the Hive, "systemctl start thehive" and now "systemctl enable thehive". Now that it's enabled, let's go and check the services for the Hive. And it is active and running. Perfect. One thing to keep note of is that, if you cannot access the Hive make sure to check all three services, Cassandra, Elastic Search, and the Hive. All of them should be running, otherwise The Hive won't start. In theory, we should be able to access the Hive with Port 9000.
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/92qBOE.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/MX7Jvs.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+We are presented with the hive dashboard. We can log in with their default credentials which are "admin@thehive.local and the password is "secret". If you have been following along, you might experience an error on trying to log into the Hive. This could be trying to use default credentials and then it will tell you that your authentication failed. If that's the case take a look at the status of Elastic Search, likely your Elastic Search is down.
+<br />
+<br />
+<img src="https://snipboard.io/1hOHgf.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+<img src="https://snipboard.io/F0veNS.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+<br />
+<br />
+If that's the case, you want to create a custom JVM option file and we can do that by typing in "nano /etc/elasticsearch/jvm.options.d/jvm.options". Once you open up this file, you want to paste in the following content. Essentially this is telling Java to limit its memory usage to 4 gigs. Our virtual machine has a total of 8 gigs, however for the sake of making sure nothing crashes, I'll change it to 2 gigs. Now this is telling Elastic Search to allocate 2 gigs of memory for Java. You can go ahead and save this out. 
+<br />
+<br />
+<img src="https://snipboard.io/clpAFd.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+<img src="https://snipboard.io/V1qd0y.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+<img src="https://snipboard.io/Pp3vzZ.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+<img src="https://snipboard.io/qlIdVu.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+<br />
+<br />
+Then, you want to restart your Elastic Search. Now again, this is only if you are experiencing any errors when you're trying to log in using default credentials. Now that we have the Hive configured, we'll move on to Wazuh and configure that.
 <br />
 <br />
 <br />
@@ -310,27 +303,27 @@ Now this is telling Elastic Search to allocate 2 gigs of memory for Java. You ca
 To begin with configuring Wazuh, you want to log into the dashboard using the administrative credentials that we obtained in part two. Immediately, we see no agents were added to this manager. Incase you do not have the credentials, you can head over to Wazuh's manager and then type in "ls", just to see if your "wazuh-install-file" exist. It should, technically. If you've downloaded Wazuh via the curl option. 
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/VD5OBW.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/i3GDrK.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/RAxW8P.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
 <br />
 <br />
-Now what you want to do is run the command "tar -xvf wazuh-install-files.tar" and then this will extract all the files from your tar file. Once those files have been extracted, change into the "wazuh-install-files" directory. From here, we can type in "ls" and the file that we're looking for is called wazuh-password.txt. So we can cat that out. 
+Now what you want to do is run the command "tar -xvf wazuh-install-files.tar" and then this will extract all the files from your tar file. Once those files have been extracted, change into the "wazuh-install-files" directory. From here, we can type in "ls" and the file that we're looking for is called "wazuh-password.txt". So we can cat that out. 
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/T1Odmb.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/6fkzmU.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/YhW2T4.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
 <br />
@@ -338,13 +331,13 @@ Now what you want to do is run the command "tar -xvf wazuh-install-files.tar" an
 Here will be all of our passwords. The main one that we want of course, is the admin password. This is what we're going to be using to log into the dashboard. Secondly, we want the Wazuh API user. We'll be using this later on in the lab to perform responsive capabilities.
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/1wL5jq.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/QEFI8D.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/29qj8c.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
 <br />
@@ -352,13 +345,13 @@ Here will be all of our passwords. The main one that we want of course, is the a
 Heading back to our wazuh dashboard. As we can see again, we have no agents installed. In order to install one, we can simply click on "Add Agent" because we are using a Windows machine. Select "Windows". Scroll down for the "Server address". We'll put in Wazuh's public IP. Which in my case was "159.203.17.39". Your public IP is going to be different than mine.
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/XZGc1a.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/pEyBNf.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/Nkmefr.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
 <br />
@@ -366,13 +359,13 @@ Heading back to our wazuh dashboard. As we can see again, we have no agents inst
 Underneath, we see "Assign an agent name". This is optional, but I'll type in "mydfir". It'll then ask you if you want to select one or more existing groups. I'll leave that as default. Now we can copy the following command. So I'll go ahead and copy that. I am on my Windows machine, so I'll open up a Powershell window with administrative privileges.
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/Nj1kUq.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/gY4HFn.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/VKr621.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
 <br />
@@ -380,46 +373,33 @@ Underneath, we see "Assign an agent name". This is optional, but I'll type in "m
 Once we open that up, go ahead and paste in the command and then hit "Enter". After the command is done installing, we can then start the service by typing in "Net Start wazuhsvc". That is one way to start the service, or you can go ahead and type in "Services" in the Windows search bar. Then from here, you want to look for Wazuh Service. As we can see, it's running. 
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/iPwTOz.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/R8eJzI.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/aJkYN3.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<br />
-<br />
-So that means in our dashboard, we should be able to see our agent. I'll go ahead and close this one out. Currently, I do see the agent but it is disconnected, so let's just wait a little bit and see what happens. So after a couple of seconds, we can see that there is a total agent of one and an active agent as well
-<br />
-<br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/WTowdq.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
 <br />
 <br />
-That means our Windows machine is checking into Wazuh successfully. Now we can click on "Security events" and start querying for events.
+So that means in our dashboard, we should be able to see our agent. I'll go ahead and close this one out. Currently, I do see the agent but it is disconnected, so let's just wait a little bit and see what happens. So after a couple of seconds, we can see that there is a total agent of one and an active agent as well. That means our Windows machine is checking into Wazuh successfully. Now we can click on "Security events" and start querying for events.
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/7l4otj.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/0HCLlD.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
-<img src="" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/21mIeC.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
 <br />
 <br />
-You just configured both the Hive and Wazuh and now they are working as expected. Our end goal is to detect Mimikats usage on our Windows 10 client machine. To do that, we must first generate telemetry and create an alert related to Mimikats, which is what we will do in the next episode. 
-
-That is it for this part and I hope this has been helpful for you so far.
+You just configured both the Hive and Wazuh and now they are working as expected. Our end goal is to detect Mimikats usage on our Windows 10 client machine. To do that, we must first generate telemetry and create an alert related to Mimikats, which is what we will do in the next episode. That is it for this part and I hope this has been helpful for you so far.
 
